@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Recipe</title>
+    <style>
+        nav {
+            background: rgb(231, 231, 5);
+            height: 70px;
+        }
+        nav > button{
+            float: right;
+            border: none;
+            background: green;            
+            padding: 7px;
+            margin: 20px 100px;
+        }
+        img{
+            width: 250px;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav">
+        <button>Create Recipe</button>
+    </nav>
+    <h1 id="text" style="display: none;">Random Recipe:</h1><div id="recipeOfDay"></div>
+    <script type="module">
+        window.addEventListener('load', ()=>{
+            const btn = document.querySelector('button')
+            btn.addEventListener('click', ()=>{
+                recipeOfTheDay();
+            })
+        })
+        
+        function showData(data, id) {
+            const text = document.getElementById('text');
+            text.style.display = 'block';
+            const random = document.getElementById(id);
+            random.textContent = null
+            let img = document.createElement('img');
+            img.src = data[0].strMealThumb;
+            let ul = document.createElement('ul');
+            random.append(img, ul)
+            var ingredient = 'strIngredient' + `${1}`;
+            ingredient = Array(ingredient)
+            var output = ingredient[0];
+            // console.log(typeof(output))
+            console.log(`${data[0].strIngredient}`)
+        }        
+        import {recipeOfTheDay} from './search.js'
+        </script>
+</body>
+</html>
