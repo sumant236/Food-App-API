@@ -35,3 +35,11 @@ a{
     color: black;
     font-size: 30px;
 }
+button{
+    background: green;
+    margin-left: 500px;
+    padding: 10px;
+    color: wheat;
+    border: none;
+    border-radius: 10px;
+}

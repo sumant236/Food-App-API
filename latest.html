@@ -9,11 +9,34 @@
 </head>
 <body>
     <script type="module">
+        import navbar from './navbar.js'
         document.body.innerHTML = navbar()
         window.addEventListener('load', ()=>{
             latestRecipe();
         })
-        import {latestRecipe, navbar} from './search.js'
+        function latestRecipe() {
+            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s`)
+            .then(resolve => resolve.json())
+            .then(resolve => showData(resolve.meals, 'Latest Recipe'))
+            .catch(err => console.log(err))
+        }
+
+        function showData(data, content) {
+            const h1 = document.getElementById('data');
+            h1.textContent = content;
+            const cont = document.getElementById('content')
+            cont.textContent = null
+            for(let i in data){
+                let div = document.createElement('div')
+                let mealImage = document.createElement('img');
+                mealImage.src = data[i].strMealThumb;
+                let h4 = document.createElement('h4')
+                h4.textContent = `${data[i].strMeal}`
+                div.append(mealImage, h4)
+                cont.append(div)
+            }
+            console.log(data)
+        }
     </script>
     <script src="https://kit.fontawesome.com/32650486ba.js" crossorigin="anonymous"></script>
 </body>

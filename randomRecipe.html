@@ -5,47 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Recipe</title>
-    <style>
-        nav {
-            background: rgb(231, 231, 5);
-            height: 70px;
-        }
-        nav > button{
-            float: right;
-            border: none;
-            background: green;            
-            padding: 7px;
-            margin: 20px 100px;
-        }
-        img{
-            width: 250px;
-            height: 250px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav id="nav">
-        <button>Create Recipe</button>
-    </nav>
-    <h1 id="text" style="display: none;">Random Recipe:</h1><div id="recipeOfDay"></div>
     <script type="module">
-        window.addEventListener('load', ()=>{
-            const btn = document.querySelector('button')
-            btn.addEventListener('click', ()=>{
-                recipeOfTheDay();
-            })
-        })
+        import navbar from './navbar.js'
+        document.body.innerHTML = navbar()
         
-        function showData(data, id) {
-            const text = document.getElementById('text');
-            text.style.display = 'block';
-            // const random = document.getElementById(id);
-            // random.textContent = null
-            // let img = document.createElement('img');
-            // img.src = data[0].strMealThumb;
-            
-        }        
-        import {recipeOfTheDay} from './search.js'
+        recipeOfTheDay();
+        function recipeOfTheDay() {
+            fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+            .then(resolve => resolve.json())
+            .then(resolve => showData(resolve.meals, 'Recipe Of The Day'))
+            .catch(err => console.log(err))
+        }
+
+        function showData(data, content) {
+            const h1 = document.getElementById('data');
+            h1.textContent = content;
+            const butn = document.createElement('button');
+            butn.textContent = 'Create Random Recipe';
+            butn.addEventListener('click', recipeOfTheDay)
+            h1.append(butn);
+            const cont = document.getElementById('content')
+            cont.textContent = null
+            let div = document.createElement('div')
+            let mealImage = document.createElement('img');
+            mealImage.src = data[0].strMealThumb;
+            let h4 = document.createElement('h4')
+            h4.textContent = `${data[0].strMeal}`
+            let h5 = document.createElement('h5');
+            h5.textContent = 'Instructions:';
+            const p = document.createElement('p');
+            p.textContent = data[0].strInstructions
+            div.append(mealImage, h4, h5, p)
+            cont.append(div)
+            console.log(data)
+        }
         </script>
+        <script src="https://kit.fontawesome.com/32650486ba.js" crossorigin="anonymous"></script>
 </body>
 </html>
