@@ -39,17 +39,11 @@
         function showData(data, id) {
             const text = document.getElementById('text');
             text.style.display = 'block';
-            const random = document.getElementById(id);
-            random.textContent = null
-            let img = document.createElement('img');
-            img.src = data[0].strMealThumb;
-            let ul = document.createElement('ul');
-            random.append(img, ul)
-            var ingredient = 'strIngredient' + `${1}`;
-            ingredient = Array(ingredient)
-            var output = ingredient[0];
-            // console.log(typeof(output))
-            console.log(`${data[0].strIngredient}`)
+            // const random = document.getElementById(id);
+            // random.textContent = null
+            // let img = document.createElement('img');
+            // img.src = data[0].strMealThumb;
+            
         }        
         import {recipeOfTheDay} from './search.js'
         </script>

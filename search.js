@@ -1,10 +1,26 @@
+function navbar() {
+    return `<nav id="nav">
+        <div>
+            <input type="text" placeholder="Search Food"/>
+            <i class="fas fa-search" style="font-size: 18px; border: 2px solid #000; padding: 3px; border-radius: 5px;"></i>
+        </div>
+        <a href="latest.html">Latest Recipes</a>
+        <a href="randomRecipe.html">Random Recipe</a>
+    </nav>
+    <form>
+        <h1 style="display: none;" id="search">Searched Food</h1><div id="searchData"></div>
+        <h1>Latest Recipe:</h1><div id="latestData"></div>
+    </form>`
+}
+document.body.innerHTML = navbar();
 window.addEventListener('load', ()=>{
-    const btn = document.querySelector("i");
-    btn.addEventListener('click', searchData)
     latestRecipe();
     recipeOfTheDay();
     // event.preventDefault()
 })
+const btn = document.querySelector("i");
+btn.addEventListener('click', searchData)
+
 function searchData() {
     // event.preventDefault();
     const value = document.querySelector('input').value;
@@ -49,4 +65,4 @@ function showData(data, id) {
     console.log(data)
 }
 
-export {latestRecipe, recipeOfTheDay, showData}
+export {latestRecipe, navbar}
